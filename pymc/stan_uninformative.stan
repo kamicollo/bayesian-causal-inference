@@ -1,3 +1,4 @@
+
 data {
   int<lower=1> N;                    // Sample size N 
   array[N] int<lower=0, upper=1> Z;  // Treatment assigned Z
@@ -24,10 +25,10 @@ model {
   // implicit prior: pi_c ~ Unif(0, 1)
   
   // Priors for outcome model parameters
-  pi_c ~ beta(8, 2);
-  eta_c0 ~ beta(18, 2);  
-  eta_c1 ~ beta(18, 2);  
-  eta_n ~ beta(18, 2); 
+  pi_c ~ beta(2, 2);
+  eta_c0 ~ beta(2, 2);  
+  eta_c1 ~ beta(2, 2);  
+  eta_n ~ beta(2, 2); 
 
   // Likelihood
   for(n in 1:N){
@@ -55,9 +56,5 @@ model {
 
 generated quantities {
   // Superpopulation complier average causal effect (CACE)
-  // in per-1000 units
-  real CACE = (eta_c1 - eta_c0) * 10^3;
+  real CACE = (eta_c1 - eta_c0);
 }
-
-
-
